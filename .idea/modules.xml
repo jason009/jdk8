@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/jdk-base.iml" filepath="$PROJECT_DIR$/jdk-base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wpx-base-concurrent/wpx-base-concurrent.iml" filepath="$PROJECT_DIR$/wpx-base-concurrent/wpx-base-concurrent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wpx-base-lambda/wpx-base-lambda.iml" filepath="$PROJECT_DIR$/wpx-base-lambda/wpx-base-lambda.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wpx-base-optional/wpx-base-optional.iml" filepath="$PROJECT_DIR$/wpx-base-optional/wpx-base-optional.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wpx-base-stream/wpx-base-stream.iml" filepath="$PROJECT_DIR$/wpx-base-stream/wpx-base-stream.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wpx-jdk-common/wpx-jdk-common.iml" filepath="$PROJECT_DIR$/wpx-jdk-common/wpx-jdk-common.iml" />
+    </modules>
+  </component>
+</project>

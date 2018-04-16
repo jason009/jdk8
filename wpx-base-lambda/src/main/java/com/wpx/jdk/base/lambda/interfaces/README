@@ -1,0 +1,83 @@
+语言设计者投入了大量精力来思考如何使现有的函数友好地支持lambda。
+最终采取的方法是：增加函数式接口的概念。
+函数式接口(简称：FI)就是一个仅含有一个抽象方法的普通接口。像这样的接口，可以被隐式转换为lambda表达式。
+这里的抽象方法指的是该接口自己特有的抽象方法，而不包含它从其上级继承过来的抽象方法，例如：
+@FunctionalInterface
+Interface FI{
+   abstract judge(int a);
+   abstract equals();  //这个接口尽管含有两个抽象方法，但是它仍然是一个FI，因为equals抽象方法是其从超类Object中继承的
+}
+
+java.lang.Runnable与java.util.concurrent.Callable是函数式接口最典型的两个例子。
+在实际使用过程中，函数式接口是容易出错的：如有某个人在接口定义中增加了另一个方法，
+这时，这个接口就不再是函数式的了，并且编译过程也会失败。为了克服函数式接口的这种脆
+弱性并且能够明确声明接口作为函数式接口的意图，
+Java 8增加了一种特殊的注解
+
+@FunctionalInterface（Java 8中所有类库的已有接口都添加了@FunctionalInterface注解）。让我们看一下这种函数式接口的定义：
+@FunctionalInterface
+public interface Functional {
+    void method();
+}
+
+需要记住的一件事是：默认方法（默认方法可以被继承，但是要注意，如果继承了两个接口里面的默认方法一样的话，那么必须重写）
+与静态方法（静态方法不是抽象方法）并不影响函数式接口的契约，可以任意使用：
+@FunctionalInterface
+public interface FunctionalDefaultMethods {
+    void method();
+    default void defaultMethod() {
+    }
+}
+Lambda是Java 8最大的卖点。它具有吸引越来越多程序员到Java平台上的潜力，并且能够在纯Java语言环境中提供
+一种优雅的方式来支持函数式编程。
+
+#########函数式接口，以及和Lambda表达式的关系#####
+一、函数式接口:
+　　函数式接口其实本质上还是一个接口，但是它是一种特殊的接口：SAM类型的接口（Single Abstract Method）。定义了这种类型的接口，使得以其为参数的方法，可以在调用时，使用一个lambda表达式作为参数。从另一个方面说，一旦我们调用某方法，可以传入lambda表达式作为参数，则这个方法的参数类型，必定是一个函数式的接口，这个类型必定会使用@FunctionalInterface进行修饰。
+　　从SAM原则上讲，这个接口中，只能有一个函数需要被实现，但是也可以有如下例外:
+　　　　1. 默认方法与静态方法并不影响函数式接口的契约，可以任意使用，即
+　　　　　　函数式接口中可以有静态方法，一个或者多个静态方法不会影响SAM接口成为函数式接口，并且静态方法可以提供方法实现
+　　　　　　可以由 default 修饰的默认方法方法，这个关键字是Java8中新增的，为的目的就是使得某一些接口，原则上只有一个方法被实现，但是由于历史原因，不得不加入一些方法来兼容整个JDK中的API，所以就需要使用default关键字来定义这样的方法
+　　　　2. 可以有 Object 中覆盖的方法，也就是 equals，toString，hashcode等方法。
+
+　　JDK中以前所有的函数式接口都已经使用 @FunctionalInterface 定义，可以通过查看JDK源码来确认，以下附JDK 8之前已有的函数式接口：
+            java.lang.Runnable
+            java.util.concurrent.Callable
+            java.security.PrivilegedAction
+            java.util.Comparator
+            java.io.FileFilter
+            java.nio.file.PathMatcher
+            java.lang.reflect.InvocationHandler
+            java.beans.PropertyChangeListener
+            java.awt.event.ActionListener
+            javax.swing.event.ChangeListener
+如：
+@FunctionalInterface
+public interface Runnable {
+    public abstract void run();
+}
+以下为一个自定义函数式接口的示例:
+    @FunctionalInterface
+    interface Converter<F, T> {
+        T convert(F from);
+    }
+使用：
+Converter<String, Integer> converter = (from) -> Integer.valueOf(from);
+Integer converted = converter.convert("123");
+注：方法和构造函数引用在Java8中可以通过 :: 操作符调用
+　　自行设计的方法中, 如果可以接收 lambda 表达式, 则可以使用 Function 作为参数, 如下为一些已经实现的函数式接口:
+     // Function<T, R> -T作为输入，返回的R作为输出
+    Function<String,String> function = (x) -> {System.out.print(x+": ");return "Function";};
+    System.out.println(function.apply("hello world"));
+    //Predicate<T> -T作为输入，返回的boolean值作为输出
+    Predicate<String> pre = (x) ->{System.out.print(x);return false;};
+    System.out.println(": "+pre.test("hello World"));
+    //Consumer<T> - T作为输入，执行某种动作但没有返回值
+    Consumer<String> con = (x) -> {System.out.println(x);};
+    con.accept("hello world");
+    //Supplier<T> - 没有任何输入，返回T
+    Supplier<String> supp = () -> {return "Supplier";};
+    System.out.println(supp.get());
+    //BinaryOperator<T> -两个T作为输入，返回一个T作为输出，对于“reduce”操作很有用
+    BinaryOperator<String> bina = (x,y) ->{System.out.print(x+" "+y);return "BinaryOperator";};
+    System.out.println("  "+bina.apply("hello ","world"));
