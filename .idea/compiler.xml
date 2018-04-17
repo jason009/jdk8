@@ -26,14 +26,16 @@
         <module name="wpx-base-lambda" />
         <module name="wpx-base-optional" />
         <module name="wpx-base-stream" />
+        <module name="wpx-jdk-common" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
-      <module name="jdk-base" target="1.8" />
-      <module name="wpx-base-concurrent" target="1.8" />
-      <module name="wpx-base-lambda" target="1.8" />
-      <module name="wpx-base-optional" target="1.8" />
-      <module name="wpx-base-stream" target="1.8" />
+      <module name="jdk-base" target="1.5" />
+      <module name="wpx-base-concurrent" target="1.5" />
+      <module name="wpx-base-lambda" target="1.5" />
+      <module name="wpx-base-optional" target="1.5" />
+      <module name="wpx-base-stream" target="1.5" />
+      <module name="wpx-jdk-common" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

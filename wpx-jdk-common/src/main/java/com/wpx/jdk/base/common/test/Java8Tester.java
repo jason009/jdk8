@@ -1,4 +1,4 @@
-package com.wpx.jdk.base.test;
+package com.wpx.jdk.base.common.test;
 
 import java.util.ArrayList;
 import java.util.Collections;

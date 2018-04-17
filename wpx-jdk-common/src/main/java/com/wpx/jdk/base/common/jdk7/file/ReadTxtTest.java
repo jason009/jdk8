@@ -1,4 +1,4 @@
-package com.wpx.jdk.base.jdk7.file;
+package com.wpx.jdk.base.common.jdk7.file;
 
 /**
  * Created by wpx on 2018/4/7.

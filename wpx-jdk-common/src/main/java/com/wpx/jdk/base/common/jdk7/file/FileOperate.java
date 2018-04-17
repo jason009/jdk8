@@ -1,4 +1,4 @@
-package com.wpx.jdk.base.jdk7.file;
+package com.wpx.jdk.base.common.jdk7.file;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
