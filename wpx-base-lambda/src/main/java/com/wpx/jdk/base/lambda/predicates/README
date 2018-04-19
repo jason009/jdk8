@@ -1,0 +1,3 @@
+Predicate用于分配lambda表达式。
+functional interface是返回布尔值的test（T t）。
+当我们将对象传递给这个方法时，它将通过分配的lambda表达式来评估对象。

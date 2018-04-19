@@ -1,4 +1,4 @@
-package com.wpx.jdk.base.lambda.interfaces;
+package com.wpx.jdk.base.lambda.functions;
 
 import java.util.Arrays;
 import java.util.List;

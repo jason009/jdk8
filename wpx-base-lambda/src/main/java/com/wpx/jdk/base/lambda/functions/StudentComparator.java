@@ -1,4 +1,4 @@
-package com.wpx.jdk.base.lambda.interfaces;
+package com.wpx.jdk.base.lambda.functions;
 
 /**
  * Created by wpx on 2018/4/15.

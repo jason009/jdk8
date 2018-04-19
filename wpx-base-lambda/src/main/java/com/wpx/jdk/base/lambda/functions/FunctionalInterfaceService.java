@@ -1,6 +1,4 @@
-package com.wpx.jdk.base.lambda.interfaces;
-
-import java.util.function.Function;
+package com.wpx.jdk.base.lambda.functions;
 
 /**
  * Created by wpx on 2018/4/7.
